@@ -1,170 +1,457 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Abhishek - Portfolio</title>
+```
+<title>Abhishek Singh Gaira | Portfolio</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+```
 
-        body {
-            background-color: rgb(0, 0, 33);
-            color: white;
-            font-family: 'Almarai', sans-serif;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 80px;
-            background-color: rgb(9, 9, 62);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 23px;
-            list-style: none;
-            cursor: pointer;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-        }
-
-        nav ul li a:hover {
-            font-size: 1.01rem;
-            color: rgb(175, 102, 243);
-        }
-
-        .left {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .firstSection {
-            display: flex;
-            justify-content: space-around;
-            margin: 125px 0;
-            align-items: center;
-        }
-
-        .firstSection>div {
-            width: 40%;
-        }
-
-        .leftSection {
-            font-size: 3rem;
-            margin: 70px 0;
-        }
-
-        .leftSection>div {
-            margin-top: 15px;
-        }
-
-        .rightSection img {
-            width: 80%;
-        }
-
-        .Purple {
-            color: rgb(175, 102, 243);
-        }
-
-        #element {
-            color: rgb(164, 80, 246);
-        }
-
-        .secondSection {
-            max-width: 80vw;
-            margin:auto;
-            background-color: rgb(9, 9, 62);
-        }
-
-        main hr{
-            border:0;
-            height:1px;
-            background:rgb(41, 41, 91);
-            margin: 40px 80px;
-        }
-    </style>
 </head>
 
 <body>
 
-    <header>
-        <nav>
+```
+<!-- NAVBAR -->
 
-            <div class="left">
-                Abhishek's Portfolio
+<header>
+
+    <nav>
+
+        <div class="logo">
+            Abhishek<span>.</span>
+        </div>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-left">
+
+            <p class="small-text">
+                COMPUTER SCIENCE STUDENT
+            </p>
+
+            <h1>
+                Hi, I'm <span>Abhishek Singh Gaira</span>
+            </h1>
+
+            <h2>
+                <span id="element"></span>
+            </h2>
+
+            <p class="hero-description">
+                B.Tech CSE student specializing in Artificial Intelligence
+                and Machine Learning. I enjoy programming, solving problems
+                and exploring technology.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#projects" class="btn primary-btn">
+                    View Projects
+                </a>
+
+                <a href="#contact" class="btn secondary-btn">
+                    Contact Me
+                </a>
+
             </div>
 
-            <div class="right">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+        </div>
+
+
+        <div class="hero-right">
+
+            <img src="bg.png" alt="Abhishek Singh Gaira Portfolio">
+
+        </div>
+
+    </section>
+
+
+    <hr>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <h2>About <span>Me</span></h2>
+
+            <p>Get to know me</p>
+
+        </div>
+
+
+        <div class="about-content">
+
+            <div class="about-card">
+
+                <h3>Who I Am</h3>
+
+                <p>
+                    I'm Abhishek Singh Gaira, a Computer Science student
+                    pursuing a B.Tech with a specialization in Artificial
+                    Intelligence and Machine Learning at Graphic Era Hill
+                    University, Bhimtal.
+                </p>
+
             </div>
 
-        </nav>
-    </header>
+
+            <div class="about-card">
+
+                <h3>What I Like</h3>
+
+                <p>
+                    I enjoy programming, problem solving and exploring
+                    different areas of technology. I'm particularly
+                    interested in web development and AI/ML.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-    <main>
+    <hr>
 
-        <section class="firstSection">
 
-            <div class="leftSection">
+    <!-- EDUCATION -->
 
-                Hi, My Name is
-                <span class="Purple">Abhishek Singh</span>
+    <section id="education">
 
-                <div>
-                    and I am a passionate
-                    <span id="element"></span>
+        <div class="section-title">
+
+            <h2>My <span>Education</span></h2>
+
+            <p>My academic journey</p>
+
+        </div>
+
+
+        <div class="education-card">
+
+            <h3>
+                Graphic Era Hill University
+            </h3>
+
+            <div class="year">
+                Bhimtal, Uttarakhand
+            </div>
+
+            <p>
+                Bachelor's of Technology — Computer Science &
+                Engineering, Artificial Intelligence & Machine Learning
+            </p>
+
+            <p>
+                <strong>Expected Graduation:</strong> 2030
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <hr>
+
+
+    <!-- SKILLS -->
+
+    <section id="skills">
+
+        <div class="section-title">
+
+            <h2>Technical <span>Skills</span></h2>
+
+            <p>Technologies and tools I work with</p>
+
+        </div>
+
+
+        <div class="skills-container">
+
+            <div class="skill-card">
+
+                <h3>Programming Languages</h3>
+
+                <div class="skill-meters">
+                    <div class="skill-row">
+                        <div class="skill-label"><span>C</span><span class="skill-value">70%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 70%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>C++</span><span class="skill-value">70%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 70%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>Python</span><span class="skill-value">82%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 82%;"></span></div>
+                    </div>
                 </div>
 
             </div>
 
 
-            <div class="rightSection">
+            <div class="skill-card">
 
-                <img src="bg.png" alt="Abhishek Portfolio">
+                <h3>Web Development</h3>
+
+                <div class="skill-meters">
+                    <div class="skill-row">
+                        <div class="skill-label"><span>HTML</span><span class="skill-value">75%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 75%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>CSS</span><span class="skill-value">75%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 75%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>JavaScript</span><span class="skill-value">50%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 50%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>TypeScript</span><span class="skill-value">45%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 45%;"></span></div>
+                    </div>
+                </div>
 
             </div>
 
-        </section>
-        <hr>
-        <section class="secondSection">
-            <h1>Education</h1>
-        </section>
-    </main>
+
+            <div class="skill-card">
+
+                <h3>Tools</h3>
+
+                <div class="skill-meters">
+                    <div class="skill-row">
+                        <div class="skill-label"><span>VS Code</span><span class="skill-value">92%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 92%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>Git</span><span class="skill-value">88%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 88%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>GitHub</span><span class="skill-value">86%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 86%;"></span></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-    <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
-    <script>
-        var typed = new Typed('#element', {
-            strings: ['Programmer.', 'Web Developer.', 'AI/ML Enthusiast.', 'Problem Solver.', 'Tech Enthusiast.'],
-            typeSpeed: 70,
-        });
-    </script>
+    <hr>
+
+
+    <!-- SKILLS & INTERESTS -->
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>Skills & <span>Interests</span></h2>
+
+            <p>A little more about me</p>
+
+        </div>
+
+
+        <div class="interests-content">
+
+            <div class="interest-card">
+
+                <h3>Languages</h3>
+
+                <div class="skill-meters">
+                    <div class="skill-row">
+                        <div class="skill-label"><span>English</span><span class="skill-value">95%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 95%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>Hindi</span><span class="skill-value">100%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 100%;"></span></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-label"><span>German</span><span class="skill-value">7%</span></div>
+                        <div class="skill-bar"><span class="skill-fill" style="width: 7%;"></span></div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="interest-card">
+
+                <h3>Hobbies</h3>
+
+                <p>
+                    Chess • Fiction & Literature • Sports
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <hr>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <div class="section-title">
+
+            <h2>My <span>Projects</span></h2>
+
+            <p>Projects will be added here</p>
+
+        </div>
+
+
+        <div class="projects-placeholder">
+
+            <p>
+                🚧 Projects coming soon...
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <hr>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="section-title">
+
+            <h2>Get In <span>Touch</span></h2>
+
+            <p>Let's connect</p>
+
+        </div>
+
+
+        <div class="contact-box">
+
+            <h2>Let's Connect</h2>
+
+            <p>
+                Feel free to connect with me through any of the platforms
+                below.
+            </p>
+
+
+            <div class="contact-links">
+
+                <a href="tel:+917302227257">
+                    📱 Phone
+                </a>
+
+                <a href="https://www.linkedin.com/in/abhishek-singh-gaira-bb3080431/"
+                    target="_blank">
+                    LinkedIn
+                </a>
+
+                <a href="https://github.com/rootgaira"
+                    target="_blank">
+                    GitHub
+                </a>
+
+                <a href="https://leetcode.com/u/ASGKnight/"
+                    target="_blank">
+                    LeetCode
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Abhishek Singh Gaira. Built with <span>code</span>.
+    </p>
+
+</footer>
+
+
+<!-- TYPED.JS -->
+
+<script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+
+<script>
+
+    var typed = new Typed('#element', {
+
+        strings: [
+            'Programmer.',
+            'Web Developer.',
+            'AI/ML Enthusiast.',
+            'Problem Solver.',
+            'Tech Enthusiast.'
+        ],
+
+        typeSpeed: 70,
+        backSpeed: 40,
+        backDelay: 1200,
+        loop: true
+
+    });
+
+</script>
+```
 
 </body>
 
