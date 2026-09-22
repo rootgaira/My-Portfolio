@@ -10,8 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -44,11 +43,12 @@
             cursor: pointer;
         }
 
-        nav ul li a{
+        nav ul li a {
             text-decoration: none;
             color: white;
         }
-        nav ul li a:hover{
+
+        nav ul li a:hover {
             font-size: 1.01rem;
             color: rgb(175, 102, 243);
         }
@@ -61,11 +61,11 @@
         .firstSection {
             display: flex;
             justify-content: space-around;
-            margin: 80px 0;
+            margin: 125px 0;
             align-items: center;
         }
 
-        .firstSection > div {
+        .firstSection>div {
             width: 40%;
         }
 
@@ -74,7 +74,7 @@
             margin: 70px 0;
         }
 
-        .leftSection > div {
+        .leftSection>div {
             margin-top: 15px;
         }
 
@@ -86,20 +86,21 @@
             color: rgb(175, 102, 243);
         }
 
-        #changingText {
-            color: rgb(175, 102, 243);
+        #element {
+            color: rgb(164, 80, 246);
         }
 
-        /* Blinking cursor */
-        #changingText::after {
-            content: "|";
-            animation: blink 0.7s infinite;
+        .secondSection {
+            max-width: 80vw;
+            margin:auto;
+            background-color: rgb(9, 9, 62);
         }
 
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
+        main hr{
+            border:0;
+            height:1px;
+            background:rgb(41, 41, 91);
+            margin: 40px 80px;
         }
     </style>
 </head>
@@ -137,7 +138,7 @@
 
                 <div>
                     and I am a passionate
-                    <span id="changingText"></span>
+                    <span id="element"></span>
                 </div>
 
             </div>
@@ -150,78 +151,19 @@
             </div>
 
         </section>
-
+        <hr>
+        <section class="secondSection">
+            <h1>Education</h1>
+        </section>
     </main>
 
 
+    <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
     <script>
-
-        const words = [
-            "Programmer.",
-            "Web Developer.",
-            "AI/ML Enthusiast.",
-            "Problem Solver."
-        ];
-
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        const changingText = document.getElementById("changingText");
-
-
-        function typeEffect() {
-
-            const currentWord = words[wordIndex];
-
-
-            if (!isDeleting) {
-
-                changingText.textContent =
-                    currentWord.substring(0, charIndex + 1);
-
-                charIndex++;
-
-
-                if (charIndex === currentWord.length) {
-
-                    isDeleting = true;
-
-                    setTimeout(typeEffect, 1500);
-
-                    return;
-                }
-
-            } else {
-
-                changingText.textContent =
-                    currentWord.substring(0, charIndex - 1);
-
-                charIndex--;
-
-
-                if (charIndex === 0) {
-
-                    isDeleting = false;
-
-                    wordIndex++;
-
-                    if (wordIndex === words.length) {
-                        wordIndex = 0;
-                    }
-                }
-            }
-
-
-            setTimeout(
-                typeEffect,
-                isDeleting ? 60 : 100
-            );
-        }
-
-
-        typeEffect();
-
+        var typed = new Typed('#element', {
+            strings: ['Programmer.', 'Web Developer.', 'AI/ML Enthusiast.', 'Problem Solver.', 'Tech Enthusiast.'],
+            typeSpeed: 70,
+        });
     </script>
 
 </body>
