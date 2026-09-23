@@ -2,10 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
 }
 
- 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+}
+
 :root {
     --bg: #f6f1ea;
     --panel: rgba(255, 255, 255, 0.72);
@@ -56,12 +59,18 @@ nav {
     border-bottom: 1px solid var(--line);
 
     z-index: 1000;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+nav.hidden {
+    transform: translateY(-110%);
+    opacity: 0;
 }
  
 .logo {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 3rem;
+    font-weight: 900;
     letter-spacing: -0.02em;
 }
  
@@ -79,11 +88,17 @@ nav ul li a {
     color: var(--muted);
     text-decoration: none;
     font-size: 0.92rem;
-    transition: color 0.2s ease;
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
  
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a:focus-visible {
     color: var(--ink);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.65);
 }
  
 /* GENERAL */
@@ -249,6 +264,7 @@ main > section.hero {
 .about-block {
     border-left: 2px solid var(--line);
     padding-left: 24px;
+    border-radius: 6px;
 }
  
 .about-block:nth-child(1) {
@@ -660,9 +676,18 @@ opacity: 0.95;
 opacity: 0.85;
     mix-blend-mode: screen;
 }
-main, header, footer {
+header {
+    position: relative;
+    z-index: 5;
+}
+
+main, footer {
     position: relative;
     z-index: 2;
+}
+
+.bg-visuals * {
+    pointer-events: none;
 }
 .skill-card, .interest-card, .about-block, .education-entry, .projects-console, .contact-box {
     transform-style: preserve-3d;

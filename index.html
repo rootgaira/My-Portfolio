@@ -478,7 +478,44 @@
 
     <script>
     (function () {
+        var nav = document.querySelector('nav');
+        var navLinks = document.querySelectorAll('nav a[href^="#"]');
+        var lastScrollY = window.scrollY;
+
+        function toggleNavVisibility() {
+            if (!nav) return;
+            var currentY = window.scrollY;
+            if (currentY > lastScrollY && currentY > 80) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            lastScrollY = currentY;
+        }
+
+        window.addEventListener('scroll', toggleNavVisibility, { passive: true });
+
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                var href = link.getAttribute('href');
+                var target = href ? document.querySelector(href) : null;
+                if (!target) return;
+                event.preventDefault();
+
+                if (nav) {
+                    nav.classList.remove('hidden');
+                }
+
+                target.scrollIntoView({
+                    behavior: reduceMotion ? 'auto' : 'smooth',
+                    block: 'start'
+                });
+
+                window.location.hash = href;
+            });
+        });
+
         if (reduceMotion || !window.gsap) return;
 
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -567,23 +604,6 @@
             });
         });
 
-        gsap.utils.toArray('nav a[href^="#"]').forEach(function (link) {
-            link.addEventListener('click', function (event) {
-                var href = link.getAttribute('href');
-                var target = href ? document.querySelector(href) : null;
-                if (!target) return;
-                event.preventDefault();
-                gsap.to(window, {
-                    duration: 1,
-                    ease: 'power2.inOut',
-                    scrollTo: {
-                        y: target,
-                        offsetY: 76,
-                        autoKill: true
-                    }
-                });
-            });
-        });
     })();
     </script>
 
