@@ -54,6 +54,7 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
 
+
         </nav>
 
     </header>
@@ -95,8 +96,13 @@
                         Contact Me
                     </a>
 
-                    <a href="assets/Abhishek_Singh_Gaira_Resume.pdf" class="btn secondary-btn" download>
-                        CV Download
+                    <a href="assets/Abhishek_Singh_Gaira_Resume.pdf" class="btn primary-btn hero-resume" download aria-label="Download resume">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="margin-right:8px;">
+                            <path d="M12 3v10" stroke="#1a120a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 9l4 4 4-4" stroke="#1a120a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21H3" stroke="#1a120a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Resume
                     </a>
 
                 </div>
@@ -516,17 +522,37 @@
             });
         });
 
+        // ---- Safety net: hero CTAs must never stay stuck invisible/unclickable ----
+        // Runs regardless of whether GSAP loads or the intro timeline succeeds.
+        function unlockHeroButtons() {
+            document.querySelectorAll('.buttons .btn').forEach(function (btn) {
+                var cs = getComputedStyle(btn);
+                if (cs.visibility === 'hidden' || cs.opacity === '0') {
+                    btn.style.opacity = '1';
+                    btn.style.visibility = 'visible';
+                    btn.style.transform = 'none';
+                }
+            });
+        }
+        setTimeout(unlockHeroButtons, 2000);
+
         if (reduceMotion || !window.gsap) return;
 
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        var intro = gsap.timeline({ defaults: { ease: 'power2.out' } });
-        intro
-            .from('nav', { y: -26, autoAlpha: 0, duration: 0.55 })
-            .from('.logo, nav ul li', { y: -10, autoAlpha: 0, stagger: 0.06, duration: 0.45 }, '-=0.28')
-            .from('.hero-left > *', { y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.65 }, '-=0.05')
-            .from('.buttons .btn', { y: 12, autoAlpha: 0, stagger: 0.08, duration: 0.45 }, '-=0.45')
-            .from('.hero-right img', { scale: 0.94, rotate: -3, autoAlpha: 0, duration: 0.9 }, '-=0.65');
+        try {
+            var intro = gsap.timeline({ defaults: { ease: 'power2.out' } });
+            intro
+                .from('nav', { y: -26, autoAlpha: 0, duration: 0.55 })
+                .from('.logo, nav ul li', { y: -10, autoAlpha: 0, stagger: 0.06, duration: 0.45 }, '-=0.28')
+                .from('.hero-left > *:not(.buttons)', { y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.65 }, '-=0.05')
+                .from('.buttons', { autoAlpha: 0, duration: 0.4 }, '-=0.3')
+                .from('.buttons .btn', { y: 12, autoAlpha: 0, stagger: 0.08, duration: 0.45, clearProps: 'all' }, '-=0.2')
+                .from('.hero-right img', { scale: 0.94, rotate: -3, autoAlpha: 0, duration: 0.9 }, '-=0.65');
+        } catch (err) {
+            console.error('Intro animation failed:', err);
+            unlockHeroButtons();
+        }
 
         gsap.utils.toArray('.section-title').forEach(function (title) {
             gsap.from(title, {
