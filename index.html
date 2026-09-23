@@ -17,6 +17,24 @@
 
 <body>
 
+    <div class="bg-visuals" aria-hidden="true">
+        <canvas id="particle-canvas"></canvas>
+        <svg class="blobs" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff9ff3" />
+                    <stop offset="50%" stop-color="#a29bfe" />
+                    <stop offset="100%" stop-color="#5ce1e6" />
+                </linearGradient>
+            </defs>
+            <g class="blob-layer" transform="translate(40,40)">
+                <path id="blob1" d="M200,30 C260,10 340,10 400,40 C460,70 500,150 460,200 C420,250 320,270 260,240 C200,210 140,160 160,110 C180,60 140,50 200,30 Z" fill="url(#g1)" opacity="0.18"></path>
+                <path id="blob2" d="M600,120 C660,80 720,80 760,140 C800,200 760,280 700,300 C640,320 560,300 520,260 C480,220 540,160 600,120 Z" fill="#6c5ce7" opacity="0.12"></path>
+                <path id="blob3" d="M80,320 C120,280 180,260 240,280 C300,300 320,360 280,400 C240,440 160,430 120,390 C80,350 40,340 80,320 Z" fill="#00b894" opacity="0.08"></path>
+            </g>
+        </svg>
+    </div>
+
     <!-- NAVBAR -->
 
     <header>
@@ -403,6 +421,9 @@
     <!-- TYPED.JS -->
 
     <script src="https://unpkg.com/typed.js@3.0.0/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <script>
 
@@ -452,6 +473,269 @@
                 }
             });
         });
+    })();
+    </script>
+
+    <script>
+    (function () {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion || !window.gsap) return;
+
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        var intro = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        intro
+            .from('nav', { y: -26, autoAlpha: 0, duration: 0.55 })
+            .from('.logo, nav ul li', { y: -10, autoAlpha: 0, stagger: 0.06, duration: 0.45 }, '-=0.28')
+            .from('.hero-left > *', { y: 24, autoAlpha: 0, stagger: 0.1, duration: 0.65 }, '-=0.05')
+            .from('.buttons .btn', { y: 12, autoAlpha: 0, stagger: 0.08, duration: 0.45 }, '-=0.45')
+            .from('.hero-right img', { scale: 0.94, rotate: -3, autoAlpha: 0, duration: 0.9 }, '-=0.65');
+
+        gsap.utils.toArray('.section-title').forEach(function (title) {
+            gsap.from(title, {
+                y: 28,
+                autoAlpha: 0,
+                duration: 0.75,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: title,
+                    start: 'top 84%'
+                }
+            });
+        });
+
+        gsap.utils.toArray('.about-block, .education-entry, .skill-card, .interest-card, .projects-console, .contact-box').forEach(function (block, i) {
+            gsap.from(block, {
+                x: i % 2 === 0 ? -24 : 24,
+                y: 20,
+                autoAlpha: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: block,
+                    start: 'top 85%'
+                }
+            });
+        });
+
+        gsap.from('.hobby-item', {
+            scale: 0.85,
+            autoAlpha: 0,
+            stagger: 0.08,
+            duration: 0.45,
+            ease: 'back.out(1.8)',
+            scrollTrigger: {
+                trigger: '.hobby-list',
+                start: 'top 88%'
+            }
+        });
+
+        var heroRight = document.querySelector('.hero-right');
+        if (heroRight && window.matchMedia('(min-width: 801px)').matches) {
+            var xTo = gsap.quickTo(heroRight, 'x', { duration: 0.5, ease: 'power3.out' });
+            var yTo = gsap.quickTo(heroRight, 'y', { duration: 0.5, ease: 'power3.out' });
+            window.addEventListener('mousemove', function (event) {
+                var x = (event.clientX / window.innerWidth - 0.5) * 16;
+                var y = (event.clientY / window.innerHeight - 0.5) * 10;
+                xTo(x);
+                yTo(y);
+            });
+            window.addEventListener('mouseleave', function () {
+                xTo(0);
+                yTo(0);
+            });
+        }
+
+        gsap.utils.toArray('.contact-links a').forEach(function (link) {
+            link.addEventListener('mouseenter', function () {
+                gsap.to(link, { y: -3, scale: 1.03, duration: 0.22, ease: 'power2.out' });
+            });
+            link.addEventListener('mousemove', function (event) {
+                var rect = link.getBoundingClientRect();
+                var x = ((event.clientX - rect.left) / rect.width - 0.5) * 8;
+                var y = ((event.clientY - rect.top) / rect.height - 0.5) * 8;
+                gsap.to(link, { x: x, y: y - 3, duration: 0.2, ease: 'power1.out' });
+            });
+            link.addEventListener('mouseleave', function () {
+                gsap.to(link, { x: 0, y: 0, scale: 1, duration: 0.45, ease: 'elastic.out(1, 0.6)' });
+            });
+            link.addEventListener('focus', function () {
+                gsap.to(link, { y: -2, duration: 0.2, ease: 'power1.out' });
+            });
+            link.addEventListener('blur', function () {
+                gsap.to(link, { x: 0, y: 0, scale: 1, duration: 0.25, ease: 'power1.out' });
+            });
+        });
+
+        gsap.utils.toArray('nav a[href^="#"]').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                var href = link.getAttribute('href');
+                var target = href ? document.querySelector(href) : null;
+                if (!target) return;
+                event.preventDefault();
+                gsap.to(window, {
+                    duration: 1,
+                    ease: 'power2.inOut',
+                    scrollTo: {
+                        y: target,
+                        offsetY: 76,
+                        autoKill: true
+                    }
+                });
+            });
+        });
+    })();
+    </script>
+
+
+    <script>
+    (function () {
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return; // keep it simple if user prefers reduced motion
+
+        // GSAP-driven blob subtle motion
+        try {
+            if (window.gsap) {
+                var b1 = document.getElementById('blob1');
+                var b2 = document.getElementById('blob2');
+                var b3 = document.getElementById('blob3');
+                gsap.to(b1, { duration: 8, x: 16, y: -8, rotation: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+                gsap.to(b2, { duration: 10, x: -24, y: 12, rotation: -2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.3 });
+                gsap.to(b3, { duration: 12, x: 8, y: 18, rotation: 6, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.6 });
+            }
+        } catch (e) { /* ignore */ }
+
+        // Particle canvas (lightweight)
+        (function () {
+            var canvas = document.getElementById('particle-canvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var w, h, mouse = { x: -9999, y: -9999 };
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (var i = 0; i < 60; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: 0.8 + Math.random() * 2.6,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    hue: 160 + Math.random() * 200
+                });
+            }
+
+            window.addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+            window.addEventListener('mouseleave', function () { mouse.x = -9999; mouse.y = -9999; });
+
+            function step() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(function (p) {
+                    // simple attraction/repel
+                    var dx = p.x - mouse.x;
+                    var dy = p.y - mouse.y;
+                    var dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < 120) {
+                        var force = (120 - dist) * 0.003;
+                        p.vx += (dx / dist) * force;
+                        p.vy += (dy / dist) * force;
+                    }
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.98; p.vy *= 0.98;
+                    if (p.x < -20) p.x = w + 20;
+                    if (p.x > w + 20) p.x = -20;
+                    if (p.y < -20) p.y = h + 20;
+                    if (p.y > h + 20) p.y = -20;
+
+                    var grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*8);
+                    grd.addColorStop(0, 'rgba(255,255,255,0.85)');
+                    grd.addColorStop(0.2, 'hsla('+ (p.hue) +',70%,70%,0.25)');
+                    grd.addColorStop(1, 'rgba(255,255,255,0)');
+                    ctx.fillStyle = grd;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r*6, 0, Math.PI*2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        })();
+
+        // card tilt interaction
+        (function () {
+            var items = document.querySelectorAll('.skill-card, .interest-card, .about-block, .education-entry');
+            items.forEach(function (el) {
+                el.addEventListener('pointermove', function (ev) {
+                    var rect = el.getBoundingClientRect();
+                    var px = (ev.clientX - rect.left) / rect.width - 0.5;
+                    var py = (ev.clientY - rect.top) / rect.height - 0.5;
+                    var rx = py * 8;
+                    var ry = px * -10;
+                    gsap.to(el, { rotationX: rx, rotationY: ry, duration: 0.45, ease: 'power3.out', transformPerspective: 800 });
+                });
+                el.addEventListener('pointerleave', function () {
+                    gsap.to(el, { rotationX: 0, rotationY: 0, x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.6)'});
+                });
+            });
+        })();
+
+        // skill counters + sparkles
+        (function () {
+            if (!window.gsap || !window.ScrollTrigger) return;
+            var counters = [];
+            document.querySelectorAll('.skill-fill[data-level]').forEach(function (el) {
+                var level = Number(el.getAttribute('data-level') || 0);
+                var parent = el.closest('.skill-row');
+                if (!parent) return;
+                var label = parent.querySelector('.skill-value');
+                var num = document.createElement('span');
+                num.className = 'skill-num';
+                num.textContent = '0%';
+                label.parentNode.insertBefore(num, label.nextSibling);
+                counters.push({ el: el, level: level, num: num, parent: parent });
+            });
+
+            counters.forEach(function (c) {
+                ScrollTrigger.create({
+                    trigger: c.parent,
+                    start: 'top 85%',
+                    onEnter: function () {
+                        gsap.to(c.el, { width: c.level + '%', duration: 0.9, ease: 'power2.out' });
+                        gsap.to({ v: 0 }, {
+                            v: c.level,
+                            duration: 0.9,
+                            ease: 'power2.out',
+                            onUpdate: function () { c.num.textContent = Math.round(this.targets()[0].v) + '%'; },
+                            onComplete: function () {
+                                for (var i = 0; i < 6; i++) {
+                                    (function () {
+                                        var s = document.createElement('div');
+                                        s.className = 'sparkle';
+                                        document.body.appendChild(s);
+                                        var rect = c.el.getBoundingClientRect();
+                                        var left = rect.left + Math.random() * rect.width;
+                                        var top = rect.top + Math.random() * rect.height;
+                                        s.style.left = left + 'px'; s.style.top = top + 'px';
+                                        gsap.to(s, { x: (Math.random()-0.5)*40, y: (Math.random()-0.5)*40-10, opacity: 1, scale: 1.1, duration: 0.5, ease: 'power2.out', onComplete: function(){
+                                            gsap.to(s, { opacity: 0, scale: 0.2, duration: 0.55, ease: 'power3.in', onComplete: function(){ s.remove(); }});
+                                        }});
+                                    })();
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        })();
+
+        window.addEventListener('resize', function(){ try{ gsap.set('.hero-right', { x:0, y:0 }); }catch(e){} });
     })();
     </script>
 
